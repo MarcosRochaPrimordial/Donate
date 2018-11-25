@@ -16,6 +16,6 @@ export class StoryController {
     getFeed(req: Request, res: Response) {
         this._storyModel.getFeed((response, status) => {
             res.status(status).json(response);
-        })
+        });
     }
 }

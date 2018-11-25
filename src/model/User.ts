@@ -6,7 +6,6 @@ export const UserSchema = new mongoose.Schema({
     completeName: {type: String, required: [true, 'Informe o nome completo']},
     email: {type: String, required: [true, 'Informe o email']},
     password: {type: String, required: [true, 'Informe a senha']},
-    cep: {type: String, required: [true, 'Informe o CEP'], size: 8},
     street: {type: String, required: [true, 'Informe a Rua']},
     neighborhood: {type: String, required: [true, 'Informe o bairro']},
     state: {type: String, required: [true, 'Informe o estado']},
