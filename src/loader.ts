@@ -1,5 +1,5 @@
-import { User } from "./controller/User.controller";
+import { UserController } from "./controller/User.controller";
 import { connect } from './config/DbConnection';
 
 connect();
-new User();
+new UserController();

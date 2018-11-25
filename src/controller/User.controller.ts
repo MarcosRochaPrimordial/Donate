@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { UserModel } from './../model/User.model';
 
 @Controller({url: '/user', cors: '*'})
-export class User {
+export class UserController {
 
     private _userModel: UserModel;
 

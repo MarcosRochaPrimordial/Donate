@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from 'jsonwebtoken';
 const env = require('./.env');
 
-export function Authorization(req: Request, res: Response, next: NextFunction) {
+export function Authentication(req: Request, res: Response, next: NextFunction) {
     if(req.method === "OPTIONS") {
         next();
     } else {
