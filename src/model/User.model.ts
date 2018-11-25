@@ -1,7 +1,7 @@
 import { User } from './User';
+import { handleErrorsFromDb } from './../config/DbHandles';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
-import * as _ from 'lodash';
 const env = require('./../../.env');
 
 export class UserModel {
@@ -11,8 +11,7 @@ export class UserModel {
         let password = user.password;
         User.findOne({ email }, (err: any, data: any) => {
             if(err) {
-                let errors = this.sendErrorsFromDB(err);
-                callback({ errors }, 503);
+                handleErrorsFromDb(err, callback, 503);
             } else if(data && bcrypt.compareSync(password, data.password)) {
                 let token = jwt.sign(data.toJSON(), env.authSecret, {
                     expiresIn: '7 day'
@@ -30,9 +29,9 @@ export class UserModel {
 
         User.findOne({ email }, (err: any, data: any) => {
             if(err) {
-                callback('Serviço indisponível', 503);
+                callback({ messages: ['Serviço indisponível'] }, 503);
             } else if(data) {
-                callback('Email já cadastrado', 403);
+                callback({ messages: ['Email já cadastrado'] }, 403);
             } else {
                 let salt = bcrypt.genSaltSync();
                 user.password = bcrypt.hashSync(user.password, salt);
@@ -40,19 +39,12 @@ export class UserModel {
                 let newUser = new User(user);
                 newUser.save(err => {
                     if(err) {
-                        let errors = this.sendErrorsFromDB(err);
-                        callback({ errors }, 403);
+                        handleErrorsFromDb(err, callback, 403);
                     } else {
-                        callback('Cadastrado com sucesso', 200);
+                        callback(user, 200);
                     }
                 });
             }
         });
-    }
-
-    private sendErrorsFromDB(dbErrors): {} {
-        const messages = [];
-        _.forIn(dbErrors.errors, error => messages.push(error.message));
-        return { messages };
     }
 }

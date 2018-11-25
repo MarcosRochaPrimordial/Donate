@@ -1,18 +1,19 @@
 import * as mongoose from 'mongoose';
 
-export const UserScheema = new mongoose.Schema({
+import { StorySchema } from './Story';
+
+export const UserSchema = new mongoose.Schema({
     completeName: {type: String, required: [true, 'Informe o nome completo']},
     email: {type: String, required: [true, 'Informe o email']},
     password: {type: String, required: [true, 'Informe a senha']},
-    cep: {type: String, required: [true, 'Informe o CEP'], max: 8},
-    street: {type: String, required: [true, 'Informe a rua']},
+    cep: {type: String, required: [true, 'Informe o CEP'], size: 8},
+    street: {type: String, required: [true, 'Informe a Rua']},
+    neighborhood: {type: String, required: [true, 'Informe o bairro']},
     state: {type: String, required: [true, 'Informe o estado']},
     country: {type: String, required: [true, 'Informe o país']},
-    hospital: {type: String},
-    room: {type: String},
-    hospBed: {type: String},
-    isDonor: {type: Boolean, required: [true, 'Escolha o perfil']}
+    isDonor: {type: Boolean, required: [true, 'Escolha seu perfil']},
+    Story: StorySchema
 });
 
-export const User = mongoose.model('User', UserScheema);
+export const User = mongoose.model('User', UserSchema);
 export default User;

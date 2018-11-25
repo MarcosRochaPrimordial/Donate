@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as _ from 'lodash';
 
 const host: string = '127.0.0.1';
 const port: number = 27017;
@@ -11,4 +12,10 @@ export function connect() {
             console.log(err.message);
         }
     });
+}
+
+export function handleErrorsFromDb(dbErrors, callback, status) {
+    const errors = [];
+    _.forIn(dbErrors.errors, error => errors.push(error.message));
+    callback({ errors }, status)
 }

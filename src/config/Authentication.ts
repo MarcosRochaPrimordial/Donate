@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as jwt from 'jsonwebtoken';
-const env = require('./.env');
+const env = require('./../../.env');
 
 export function Authentication(req: Request, res: Response, next: NextFunction) {
     if(req.method === "OPTIONS") {
@@ -13,7 +13,6 @@ export function Authentication(req: Request, res: Response, next: NextFunction) 
         }
 
         jwt.verify(token, env.authSecret, (err, decoded) => {
-            console.log(decoded);
             if(err) {
                 return res.status(403).send({
                     errors: ['Não foi possível autenticar Token']
