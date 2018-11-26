@@ -18,6 +18,22 @@ export class StoryModel {
 
     calculateProximity() {
         let user = UserService.getInstance().getUser();
-        return {'$and': [{'Story.presentationText': {'$exists': true}}, {'$or': [{'$and': [{'street': user.street}, {'neighborhood': user.neighborhood}]}, {'city': user.city}, {'state': user.state}, {'country': user.country}]}]};
+        return {
+            '$and': [
+                {
+                    'Story.presentationText': {'$exists': true}
+                },
+                {
+                    '$or': [
+                        {
+                            '$and': [
+                                {'street': user.street}, {'neighborhood': user.neighborhood}
+                            ]
+                        },
+                        {'city': user.city}, {'state': user.state}, {'country': user.country}
+                    ]
+                }
+            ]
+        };
     }
 }
