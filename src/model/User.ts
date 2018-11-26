@@ -8,6 +8,7 @@ export const UserSchema = new mongoose.Schema({
     password: {type: String, required: [true, 'Informe a senha']},
     street: {type: String, required: [true, 'Informe a Rua']},
     neighborhood: {type: String, required: [true, 'Informe o bairro']},
+    city: {type: String, required: [true, 'Informe a cidade']},
     state: {type: String, required: [true, 'Informe o estado']},
     country: {type: String, required: [true, 'Informe o país']},
     isDonor: {type: Boolean, required: [true, 'Escolha seu perfil']},

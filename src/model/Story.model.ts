@@ -3,7 +3,7 @@ import User from './User';
 
 export class StoryModel {
     getFeed(callback) {
-        User.find({'Story.hospital': {'$exists': true}},
+        User.find({'Story.presentationText': {'$exists': true}},
                   {'_id': 1, 'completeName': 1, 'Story': 1},
         (err, data) => {
             if(err) {
