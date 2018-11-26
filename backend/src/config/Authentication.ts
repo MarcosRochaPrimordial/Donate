@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from 'jsonwebtoken';
 const env = require('./../../.env');
 
+import { UserService } from './../service/User.service';
+
 export function Authentication(req: Request, res: Response, next: NextFunction) {
     if(req.method === "OPTIONS") {
         next();
@@ -18,6 +20,8 @@ export function Authentication(req: Request, res: Response, next: NextFunction) 
                     errors: ['Não foi possível autenticar Token']
                 });
             } else {
+                let userService = UserService.getInstance();
+                userService.setUser(decoded);
                 next();
             }
         });
