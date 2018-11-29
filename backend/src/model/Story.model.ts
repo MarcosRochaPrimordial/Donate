@@ -4,7 +4,7 @@ import { UserService } from '../service/User.service';
 import User from './User';
 
 export class StoryModel {
-    getFeed(callback) {
+    public getFeed(callback) {
         User.find(this.calculateProximity(),
                   {'_id': 1, 'completeName': 1, email: 1, 'Story': 1},
         (err, data) => {
@@ -16,7 +16,7 @@ export class StoryModel {
         });
     }
 
-    calculateProximity() {
+    private calculateProximity() {
         let user = UserService.getInstance().getUser();
         return {
             '$and': [

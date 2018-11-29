@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 import { StoryModel } from '../model/Story.model';
 
-@Controller({url: '/stories', auth: Authentication, cors: '*'})
+@Controller({ url: '/stories', auth: Authentication, cors: '*' })
 export class StoryController {
     private _storyModel: StoryModel;
 
@@ -12,7 +12,7 @@ export class StoryController {
         this._storyModel = new StoryModel();
     }
 
-    @Get()
+    @Get('/pegarhistorias')
     getFeed(req: Request, res: Response) {
         this._storyModel.getFeed((response, status) => {
             res.status(status).json(response);
