@@ -49,34 +49,30 @@ export class UserModel {
     }
 
     public changeUser(user: any, callback: any) {
-        let id = user._id;
-
-        User.findOne({ id }, (err: any, data: any) => {
-            if (err) {
-                callback({ messages: ['Serviço indisponível'] }, 503);
-            } else if (data) {
-                user.model.update({ _id: id }, { $set: { completeName: user.completeName, 
-                    email: user.email, street: user.street, neighborhood: user.neighborhood, 
-                    city: user.city, state: user.state, country: user.country, isDonor: user.isDonor, 
-                    Story: user.Story} });
-                    callback(user, 200);
-            } else {
-                callback({ messages: ['Usuário não encontrado'] }, 404);
+        user.model.update({ _id: user._id }, {
+            $set: {
+                completeName: user.completeName,
+                email: user.email, street: user.street, neighborhood: user.neighborhood,
+                city: user.city, state: user.state, country: user.country, isDonor: user.isDonor,
+                Story: user.Story
             }
-        });
+        }).sucess(
+            callback(user, 200)
+        );
     }
+
 
     public changePassword(user: any, callback: any) {
-        let email = user.email;
+    let email = user.email;
 
-        User.findOne({ email }, (err: any, data: any) => {
-            if (err) {
-                callback({ messages: ['Serviço indisponível'] }, 503);
-            } else if (data) {
-                //Método de mudar senha
-            } else {
-                callback({ messages: ['Usuário não encontrado'] }, 404);
-            }
-        });
-    }
+    User.findOne({ email }, (err: any, data: any) => {
+        if (err) {
+            callback({ messages: ['Serviço indisponível'] }, 503);
+        } else if (data) {
+            //Método de mudar senha
+        } else {
+            callback({ messages: ['Usuário não encontrado'] }, 404);
+        }
+    });
+}
 }
