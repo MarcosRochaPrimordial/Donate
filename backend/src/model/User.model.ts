@@ -49,20 +49,17 @@ export class UserModel {
     }
 
     public changeUser(user: any, callback: any) {
-        let email = user.email;
+        let id = user._id;
 
-        User.findOne({ email }, (err: any, data: any) => {
+        User.findOne({ id }, (err: any, data: any) => {
             if (err) {
                 callback({ messages: ['Serviço indisponível'] }, 503);
             } else if (data) {
-                let changedUser = new User(user);
-                changedUser.save(err => {
-                    if (err) {
-                        handleErrorsFromDb(err, callback, 403);
-                    } else {
-                        callback(user, 200);
-                    }
-                });
+                user.model.update({ _id: id }, { $set: { completeName: user.completeName, 
+                    email: user.email, street: user.street, neighborhood: user.neighborhood, 
+                    city: user.city, state: user.state, country: user.country, isDonor: user.isDonor, 
+                    Story: user.Story} });
+                    callback(user, 200);
             } else {
                 callback({ messages: ['Usuário não encontrado'] }, 404);
             }

@@ -12,7 +12,7 @@ export class StoryController {
         this._storyModel = new StoryModel();
     }
 
-    @Get('/pegarhistorias')
+    @Get()
     getFeed(req: Request, res: Response) {
         this._storyModel.getFeed((response, status) => {
             res.status(status).json(response);
