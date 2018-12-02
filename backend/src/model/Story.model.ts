@@ -2,6 +2,7 @@ import { handleErrorsFromDb } from '../config/DbHandles';
 
 import { UserService } from '../service/User.service';
 import User from './User';
+import Story from './Story';
 
 export class StoryModel {
     public getFeed(callback) {
@@ -35,5 +36,15 @@ export class StoryModel {
                 }
             ]
         };
+    }
+
+    public createHistory(callback) {
+        let user = UserService.getInstance().getUser();
+
+        Story.update({_id: user._id}, {
+            $set: {
+                presentationText: 'blabla'
+            } 
+        })
     }
 }
