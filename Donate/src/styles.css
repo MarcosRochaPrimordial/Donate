@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+.title {
+    text-align: center;
+    margin-top: -40px;
+}
+
+.white-color {
+    color: white;
+}
+
+.wrap-home {
+    margin-top: 70px;
+    background-color: rgb(204, 0, 0) !important;
+} 
+
+.framepanel {
+    background-color: white;
+}
+
+.content-framepanel {
+    margin: 10px -13px 3px -13px;
+    border: 1px solid rgb(172, 172, 172);
+    height: 300px;
+    padding: 10px;
+}
+
+@media(max-width: 767px) {
+    .wrap-home {
+        margin-top: 10px;
+    } 
+}

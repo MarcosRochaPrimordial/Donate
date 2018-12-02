@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CredenciaisComponent } from './credenciais/credenciais.component';
-import { CredentiasComponent } from './credentias/credentias.component';
+import { ApiAccessService } from './api-access.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CredenciaisComponent,
-    CredentiasComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiAccessService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

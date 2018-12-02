@@ -3,9 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/credentials',
-    pathMatch: 'full'
+    path: 'credentials',
+    loadChildren: './credentials/credentials.module#CredentialsModule'
   }
 ];
 

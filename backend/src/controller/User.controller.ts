@@ -19,7 +19,7 @@ export class UserController {
         });
     }
 
-    @Post('/register')
+    @Post()
     signUp(req: Request, res: Response): void {
         this._userModel.signUp(req.body, (response: any, status: number) => {
             res.status(status).json(response);
