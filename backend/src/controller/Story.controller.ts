@@ -1,5 +1,5 @@
 import { Authentication } from './../config/Authentication';
-import { Controller, Get, Post } from 'decorated-router';
+import { Controller, Get, Put } from 'decorated-router';
 import { Request, Response } from 'express';
 
 import { StoryModel } from '../model/Story.model';
@@ -19,9 +19,9 @@ export class StoryController {
         });
     }
 
-    @Post()
+    @Put()
     createHistory(req: Request, res: Response) {
-        this._storyModel.createHistory((response, status) => {
+        this._storyModel.createStory(req.body, (response, status) => {
             res.status(status).json(response);
         });
     } 

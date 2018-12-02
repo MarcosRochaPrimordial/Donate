@@ -56,23 +56,27 @@ export class UserModel {
                 city: user.city, state: user.state, country: user.country, isDonor: user.isDonor,
                 Story: user.Story
             }
-        }).sucess(
-            callback(user, 200)
-        );
+        }).then(function (err) {
+            if (err) {
+                handleErrorsFromDb(err, callback, 503);
+            } else {
+                callback('sucess', 200);
+            }
+        })
     }
 
 
     public changePassword(user: any, callback: any) {
-    let email = user.email;
+        let email = user.email;
 
-    User.findOne({ email }, (err: any, data: any) => {
-        if (err) {
-            callback({ messages: ['Serviço indisponível'] }, 503);
-        } else if (data) {
-            //Método de mudar senha
-        } else {
-            callback({ messages: ['Usuário não encontrado'] }, 404);
-        }
-    });
-}
+        User.findOne({ email }, (err: any, data: any) => {
+            if (err) {
+                callback({ messages: ['Serviço indisponível'] }, 503);
+            } else if (data) {
+                //Método de mudar senha
+            } else {
+                callback({ messages: ['Usuário não encontrado'] }, 404);
+            }
+        });
+    }
 }
