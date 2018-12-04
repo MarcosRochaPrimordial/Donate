@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiAccessService } from './api-access.service';
+import { CredentialsService } from './credentials/credentials.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { ApiAccessService } from './api-access.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ApiAccessService],
+  providers: [ApiAccessService, CredentialsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

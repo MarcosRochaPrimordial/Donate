@@ -10,12 +10,12 @@ export class HomeService {
 
   constructor(
     private router: Router,
-    private _apiAccessService: ApiAccessService
+    private _apiAccessService: ApiAccessService,
+    private _credentialsService: CredentialsService
   ) { }
 
   public navigateToRegister(register: any) {
-    let credentialsService = CredentialsService.getInstance();
-    credentialsService.setUser(register);
+    this._credentialsService.setUser(register);
     this.router.navigate(['/credentials/register']);
   }
 

@@ -25,11 +25,13 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-  constructor(private _registerService: RegisterService) { }
+  constructor(
+    private _registerService: RegisterService,
+    private _credentialsService: CredentialsService
+  ) { }
 
   ngOnInit() {
-    let credentialsService = CredentialsService.getInstance();
-    this.register = credentialsService.getUser();
+    this._credentialsService.getUser();
     if(this.register.isDonor == 'false') {
       this.register["Story"] = {
         hospital: '',

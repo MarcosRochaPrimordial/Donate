@@ -8,15 +8,15 @@ import { CredentialsService } from './credentials/credentials.service';
 export class AuthGuardService implements CanActivate {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private _credentialsService: CredentialsService
   ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    let credentialsService: CredentialsService = CredentialsService.getInstance();
-    if(credentialsService.getUser()) {
+    if(this._credentialsService.getUser()) {
       return true;
     }
     this.router.navigate(['/credentials'])
