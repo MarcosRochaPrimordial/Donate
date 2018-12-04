@@ -1,10 +1,16 @@
 import { User } from './User';
 import { handleErrorsFromDb } from './../config/DbHandles';
-import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
-const env = require('./../../.env');
+import { TokenService } from '../service/Token.service';
+import { MessageService } from './../service/Message.service';
 
 export class UserModel {
+
+    private _tokenService: TokenService
+
+    constructor() {
+        this._tokenService = new TokenService();
+    }
 
     public login(user: any, callback: any) {
         let email = user.email;
@@ -13,13 +19,11 @@ export class UserModel {
             if (err) {
                 handleErrorsFromDb(err, callback, 503);
             } else if (data && bcrypt.compareSync(password, data.password)) {
-                let token = jwt.sign(data.toJSON(), env.authSecret, {
-                    expiresIn: '7 day'
-                });
+                let token = this._tokenService.sign(data.toJSON(), '7 days');
                 let { completeName, email } = data;
                 callback({ completeName, email, token }, 200);
             } else {
-                callback({ errors: ['Usuário/Senha inválidos'] }, 403);
+                callback(MessageService.mssgReturn(['Usuário/Senha inválidos']), 403);
             }
         })
     }
@@ -29,9 +33,9 @@ export class UserModel {
 
         User.findOne({ email }, (err: any, data: any) => {
             if (err) {
-                callback({ messages: ['Serviço indisponível'] }, 503);
+                callback(MessageService.mssgReturn(['Serviço indisponível']), 503);
             } else if (data) {
-                callback({ messages: ['Email já cadastrado'] }, 403);
+                callback(MessageService.mssgReturn(['Email já cadastrado']), 403);
             } else {
                 let salt = bcrypt.genSaltSync();
                 user.password = bcrypt.hashSync(user.password, salt);
@@ -71,11 +75,26 @@ export class UserModel {
 
         User.findOne({ email }, (err: any, data: any) => {
             if (err) {
-                callback({ messages: ['Serviço indisponível'] }, 503);
+                callback(MessageService.mssgReturn(['Serviço indisponível']), 503);
             } else if (data) {
                 //Método de mudar senha
             } else {
-                callback({ messages: ['Usuário não encontrado'] }, 404);
+                callback(MessageService.mssgReturn(['Usuário não encontrado']), 404);
+            }
+        });
+    }
+
+    public validateToken(token, callback): boolean | void {
+        if(!this._tokenService.isExistToken(token)) {
+            callback(MessageService.mssgReturn(['Token não enviado']), 403);
+            return false;
+        }
+
+        this._tokenService.validateToken(token, (err, decoded) => {
+            if(err) {
+                callback(MessageService.mssgReturn(['Não foi possível autenticar o token.']), 403);
+            } else {
+                callback({ isValidated: true }, 200);
             }
         });
     }

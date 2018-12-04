@@ -8,7 +8,7 @@ import { ObjectId } from 'bson';
 export class StoryModel {
     public getFeed(callback) {
         User.find(this.calculateProximity(),
-            { '_id': 1, 'completeName': 1, email: 1, 'Story': 1 },
+            { '_id': 1, 'completeName': 1, 'email': 1, 'Story': 1, 'presentationText': 1 },
             (err, data) => {
                 if (err) {
                     handleErrorsFromDb(err, callback, 503);
@@ -22,6 +22,9 @@ export class StoryModel {
         let user = UserService.getInstance().getUser();
         return {
             '$and': [
+                { 'bloodType': user.bloodType },
+                { 'country': user.country },
+                { 'state': user.state },
                 {
                     'Story.presentationText': { '$exists': true }
                 },
@@ -32,7 +35,8 @@ export class StoryModel {
                                 { 'street': user.street }, { 'neighborhood': user.neighborhood }
                             ]
                         },
-                        { 'city': user.city }, { 'state': user.state }, { 'country': user.country }
+                        { 'city': user.city },
+                        { 'state': user.state }
                     ]
                 }
             ]

@@ -21,4 +21,8 @@ export class UserService {
     public setUser(user: Object) {
         this.user = user;
     }
+
+    public cleanUser() {
+        this.user = null;
+    }
 }

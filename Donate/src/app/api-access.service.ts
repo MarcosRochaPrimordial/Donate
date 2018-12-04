@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +9,17 @@ export class ApiAccessService {
   urlApi: string = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
+
+  public get(path: string = ""): Promise<Response> {
+    let key = this.resolveApiKey();
+    return this.http.get(`${this.urlApi + path}`, {headers: {
+      "Authorization": key
+    }})
+    .toPromise()
+    .then((response: any) => {
+      return response;
+    });
+  }
 
   public post(path: string = "", obj: any): Promise<Response> {
     let key = this.resolveApiKey();

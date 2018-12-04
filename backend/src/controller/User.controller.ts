@@ -26,4 +26,10 @@ export class UserController {
         });
     }
 
+    @Post('/validateToken')
+    validateToken(req: Request, res: Response): void {
+        this._userModel.validateToken(req.body.token, (response: any, status: number) => {
+            res.status(status).json(response);
+        });
+    }
 }

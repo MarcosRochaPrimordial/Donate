@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiAccessService } from 'src/app/api-access.service';
-import { CredentialsService } from '../credentials.service';
+import { CredentialsService } from '../../credentials.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -28,6 +28,7 @@ export class HomeService {
   }
 
   public doLogin(user: any) {
+    localStorage.removeItem("API_KEY");
     this._apiAccessService.post('/user/login', user)
         .then((response: Response) => {
           localStorage.setItem("API_KEY", JSON.stringify(response));
@@ -37,7 +38,7 @@ export class HomeService {
 
   private handleError(err: any) {
     let alerta: string = "Seguintes erros:\n\n";
-    err.error.errors.forEach(error => {
+    err.error.messages.forEach(error => {
       alerta += " - "+error + "\n";
     });
     

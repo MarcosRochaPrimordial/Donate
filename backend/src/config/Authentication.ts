@@ -1,26 +1,27 @@
 import { Request, Response, NextFunction } from "express";
-import * as jwt from 'jsonwebtoken';
-const env = require('./../../.env');
 
 import { UserService } from './../service/User.service';
+import { TokenService } from './../service/Token.service';
 
 export function Authentication(req: Request, res: Response, next: NextFunction) {
     if(req.method === "OPTIONS") {
         next();
     } else {
         const token = req.headers['authorization'];
+        let tokenService = new TokenService();
 
-        if(!token) {
+        if(!tokenService.isExistToken(token)) {
             return res.status(403).send({errors: ['Token não enviado.']});
         }
 
-        jwt.verify(token, env.authSecret, (err, decoded) => {
+        let userService = UserService.getInstance();
+        tokenService.validateToken(token, (err, decoded) => {
             if(err) {
+                userService.cleanUser();
                 return res.status(403).send({
                     errors: ['Não foi possível autenticar Token']
                 });
             } else {
-                let userService = UserService.getInstance();
                 userService.setUser(decoded);
                 next();
             }

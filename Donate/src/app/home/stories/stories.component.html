@@ -1,0 +1,11 @@
+<div class="card text-center" *ngFor="let story of stories">
+  <div class="upside">
+    <img src="assets/avatar.png" alt="Avatar" class="avatar">
+    <h6>{{story.completeName}}</h6>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{story.Story.hospital}}, Sala {{story.Story.room}}, Leito {{story.Story.hospBed}}</h5>
+    <p class="card-text">{{story.Story.presentationText}}</p>
+  </div>
+  <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-heart"></i></button>
+</div>

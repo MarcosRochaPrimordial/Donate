@@ -22,7 +22,7 @@ export class RegisterService {
 
   private handleError(err: any) {
     let alerta: string = "Seguintes erros: \n\n";
-    err.error.errors.forEach(error => {
+    err.error.messages.forEach(error => {
       alerta += " - "+error + "\n";
     });
 
