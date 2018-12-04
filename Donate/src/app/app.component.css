@@ -1,3 +1,8 @@
 .navbar-red {
     background-color: rgb(204, 0, 0) !important;
 }
+
+.menu-user {
+    float: right;
+    margin-right: 50px;
+}
