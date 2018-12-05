@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link text-white" href>Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-white pointer">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href>Histórias</a>
+                <a class="nav-link text-white" [routerLink]="['/']">Histórias</a>
             </li>
         </ul>
         <div class="menu-user">
@@ -21,10 +21,10 @@
                     {{CompleteNameUser}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href>Perfil</a>
-                    <a class="dropdown-item" href>Seguindo</a>
+                    <a class="dropdown-item pointer" [routerLink]="['/profile']">Perfil</a>
+                    <a class="dropdown-item pointer">Seguindo</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href (click)="logout()">Sair</a>
+                    <a class="dropdown-item pointer" (click)="logout()">Sair</a>
                 </div>
             </div>
         </div>
