@@ -1,7 +1,107 @@
-<div class="jumbotron wrap-home">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+<div class="jumbotron wrap-home-profile">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+        aria-selected="true">Dados pessoais</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+        aria-selected="false">Sua história</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="row">
+        <div class="col-12 col-md-6 framepanel">
+          <div class="content-framepanel">
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputCompleteName" aria-describedby="emailHelp" placeholder="Nome Completo">
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+              </div>
+              <div class="row justify-content-center">
+                <div class="form-group">
+                  <label for="selectBloodType">Tipo sanguíneo</label>
+                  <select class="form-control" id="selectBloodType">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="form-group">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input value="true" type="radio" id="radioProfileDonor" name="radioProfile" class="custom-control-input">
+                    <label class="custom-control-label" for="radioProfileDonor">Doador</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input value="false" type="radio" id="radioProfileReceptor" name="radioProfile" class="custom-control-input">
+                    <label class="custom-control-label" for="radioProfileReceptor">Receptor</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <button class="btn btn-danger btn-sm">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 framepanel">
+          <div class="content-framepanel">
+            <div class="row">
+              <div class="form-group col-12 col-md-4">
+                <input type="text" class="form-control" id="inputStreet" placeholder="Rua">
+              </div>
+              <div class="form-group col-12 col-md-4">
+                <input type="text" class="form-control" id="inputNeighborhood" placeholder="Bairro">
+              </div>
+              <div class="form-group col-12 col-md-4">
+                <input type="text" class="form-control" id="inputCity" placeholder="Cidade">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-md-4">
+                <input type="text" class="form-control" id="inputState" placeholder="Estado">
+              </div>
+              <div class="form-group col-12 col-md-4">
+                <input type="text" class="form-control" id="inputCountry" placeholder="País">
+              </div>
+              <div class="form-group col-12 col-md-4">
+                <input type="text" class="form-control" id="inputHospital" placeholder="Hospital">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-md-6">
+                <input type="text" class="form-control" id="inputCountry" placeholder="Sala">
+              </div>
+              <div class="form-group col-12 col-md-6">
+                <input type="text" class="form-control" id="inputHospital" placeholder="Leito">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <button class="btn btn-danger btn-sm">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <form>
+        <div class="form-group col-12">
+          <textarea class="form-control" name="story-col" id="story-col" placeholder="Sua história" rows="5"></textarea>
+        </div>
+      </form>
+      <div class="row justify-content-center">
+        <button class="btn btn-danger btn-sm">Salvar</button>
+      </div>
+    </div>
+  </div>
 </div>

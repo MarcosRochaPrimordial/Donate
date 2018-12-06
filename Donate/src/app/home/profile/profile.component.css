@@ -1,0 +1,23 @@
+.tab-pane {
+    height: 300px;
+    background-color: white;
+}
+
+.nav-link {
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(224, 224, 224)!important;
+}
+
+textarea {
+    margin-top: 20px;
+    height: 220px;
+}
+
+button {
+    
+}
+
+.wrap-home-profile {
+    margin-top: 30px;
+    background-color: rgb(204, 0, 0) !important;
+}
