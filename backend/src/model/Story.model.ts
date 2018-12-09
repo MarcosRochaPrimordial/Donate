@@ -2,13 +2,13 @@ import { handleErrorsFromDb } from '../config/DbHandles';
 
 import { UserService } from '../service/User.service';
 import User from './User';
-import Story from './Story';
 import { ObjectId } from 'bson';
+import * as mongoose from 'mongoose';
 
 export class StoryModel {
     public getFeed(callback) {
         User.find(this.calculateProximity(),
-            { '_id': 1, 'completeName': 1, 'email': 1, 'Story': 1, 'presentationText': 1 },
+            { '_id': 1, 'completeName': 1, 'email': 1, 'Story': 1 },
             (err, data) => {
                 if (err) {
                     handleErrorsFromDb(err, callback, 503);
@@ -16,6 +16,19 @@ export class StoryModel {
                     callback(data, 200);
                 }
             });
+    }
+
+    public getOwnStory(callback) {
+        let user_id = mongoose.Types.ObjectId(UserService.getInstance().getUser()._id);
+        User.findOne({'_id': user_id},
+                {'Story.presentationText': 1},
+                (err, data) => {
+                    if(err) {
+                        handleErrorsFromDb(err, callback, 503);
+                    } else {
+                        callback(data, 200);
+                    }
+                });
     }
 
     private calculateProximity() {
@@ -45,13 +58,13 @@ export class StoryModel {
 
     public createStory(body, callback) {
         let user = UserService.getInstance().getUser();
-        let user_id: ObjectId = user._id;
+        let user_id: ObjectId = mongoose.Types.ObjectId(user._id);
 
-        Story.update({ _id: user_id }, {
-            $set: {
-                presentationText: body.presentationText
+        User.updateOne({'_id': user_id}, {
+           '$set': {
+                'Story.presentationText': body.presentationText
             }
-        }).then(function (err) {
+        }, (err, data) => {
             if(err) {
                 handleErrorsFromDb(err, callback, 503);
             } else {

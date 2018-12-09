@@ -32,6 +32,17 @@ export class ApiAccessService {
     });
   }
 
+  public put(path: string = "", obj: any): Promise<Response> {
+    let key = this.resolveApiKey();
+    return this.http.put(`${this.urlApi + path}`, obj, {headers: {
+      "Authorization": key
+    }})
+    .toPromise()
+    .then((response: any) => {
+      return response;
+    })
+  }
+
   private resolveApiKey() {
     let key = "";
     let apiKey = JSON.parse(localStorage.getItem("API_KEY"));

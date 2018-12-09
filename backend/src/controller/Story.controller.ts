@@ -19,6 +19,13 @@ export class StoryController {
         });
     }
 
+    @Get('/own')
+    getOwnStory(req: Request, res: Response) {
+        this._storyModel.getOwnStory((response, status) => {
+            res.status(status).json(response);
+        })
+    }
+
     @Put()
     createHistory(req: Request, res: Response) {
         this._storyModel.createStory(req.body, (response, status) => {

@@ -20,8 +20,8 @@ export class UserModel {
                 handleErrorsFromDb(err, callback, 503);
             } else if (data && bcrypt.compareSync(password, data.password)) {
                 let token = this._tokenService.sign(data.toJSON(), '7 days');
-                let { completeName, email } = data;
-                callback({ completeName, email, token }, 200);
+                let { completeName, email, isDonor } = data;
+                callback({ completeName, email, isDonor, token }, 200);
             } else {
                 callback(MessageService.mssgReturn(['Usuário/Senha inválidos']), 403);
             }

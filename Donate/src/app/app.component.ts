@@ -17,7 +17,7 @@ export class AppComponent {
     if(!user) {
       return false;
     }
-    return user.completeName;
+    return user.completeName.split(" ")[0];
   }
 
   logout() {
